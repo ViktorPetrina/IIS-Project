@@ -1,0 +1,103 @@
+<element name="specification" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <element name="phoneDetails">
+        <element name="yearValue">
+            <data type="integer" />
+        </element>
+        <element name="brandValue">
+            <text />
+        </element>
+        <element name="modelValue">
+            <text />
+        </element>
+    </element>
+    <element name="gsmLaunchDetails">
+        <element name="launchAnnounced">
+            <text />
+        </element>
+        <element name="launchStatus">
+            <text />
+        </element>
+    </element>
+    <element name="gsmBodyDetails">
+        <element name="bodyDimensions">
+            <text />
+        </element>
+        <element name="bodyWeight">
+            <text />
+        </element>
+        <element name="bodySim">
+            <text />
+        </element>
+        <element name="bodyBuild">
+            <text />
+        </element>
+        <element name="bodyOther1">
+            <text />
+        </element>
+        <element name="bodyOther2">
+            <text />
+        </element>
+        <element name="bodyOther3">
+            <text />
+        </element>
+    </element>
+    <element name="gsmDisplayDetails">
+        <element name="displayType">
+            <text />
+        </element>
+        <element name="displaySize">
+            <text />
+        </element>
+        <element name="displayResolution">
+            <text />
+        </element>
+        <element name="displayProtection">
+            <text />
+        </element>
+        <element name="displayOther1">
+            <text />
+        </element>
+        <element name="displayOther2">
+            <text />
+        </element>
+    </element>
+    <element name="gsmMemoryDetails">
+        <element name="memoryCardSlot">
+            <text />
+        </element>
+        <element name="memoryInternal">
+            <text />
+        </element>
+        <element name="memoryOther1">
+            <text />
+        </element>
+    </element>
+    <element name="gsmSoundDetails">
+        <element name="sound35MmJack">
+            <text />
+        </element>
+        <element name="soundLoudspeaker">
+            <text />
+        </element>
+        <element name="soundOther1">
+            <text />
+        </element>
+        <element name="soundOther2">
+            <text />
+        </element>
+    </element>
+    <element name="gsmBatteryDetails">
+        <element name="batteryCharging">
+            <text />
+        </element>
+        <element name="batteryMusicPlay">
+            <text />
+        </element>
+        <element name="batteryTalkTime">
+            <text />
+        </element>
+        <element name="batteryType">
+            <text />
+        </element>
+    </element>
+</element>

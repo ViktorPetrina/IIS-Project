@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specifications>
+    <specification>
+        <phoneDetails>
+            <yearValue>2022</yearValue>
+            <brandValue>Apple</brandValue>
+            <modelValue>iPhone 14 Pro Max</modelValue>
+        </phoneDetails>
+        <gsmLaunchDetails>
+            <launchAnnounced>2022, September 07</launchAnnounced>
+            <launchStatus>Available. Released 2022, September 16</launchStatus>
+        </gsmLaunchDetails>
+        <gsmBodyDetails>
+            <bodyDimensions>160.7 x 77.6 x 7.9 mm (6.33 x 3.06 x 0.31 in)</bodyDimensions>
+            <bodyWeight>240 g (8.47 oz)</bodyWeight>
+            <bodySim>Nano-SIM and eSIM or Dual eSIM (USA)</bodySim>
+            <bodyBuild>Ceramic Shield front, glass back, stainless steel frame</bodyBuild>
+            <bodyOther1>IP68 dust/water resistant (up to 6m for 30 mins)</bodyOther1>
+            <bodyOther2>Always-On display</bodyOther2>
+            <bodyOther3></bodyOther3>
+        </gsmBodyDetails>
+        <gsmDisplayDetails>
+            <displayType>LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision, 2000 nits (peak)</displayType>
+            <displaySize>6.7 inches, 1290 x 2796 pixels (~460 ppi density)</displaySize>
+            <displayResolution>1440 x 3088 pixels (~500 ppi density)</displayResolution>
+            <displayProtection>Ceramic Shield glass</displayProtection>
+            <displayOther1>Dynamic Island</displayOther1>
+        </gsmDisplayDetails>
+        <gsmMemoryDetails>
+            <memoryCardSlot>No</memoryCardSlot>
+            <memoryInternal>128GB 6GB RAM, 256GB 6GB RAM, 512GB 6GB RAM, 1TB 6GB RAM</memoryInternal>
+            <memoryOther1>NVMe</memoryOther1>
+        </gsmMemoryDetails>
+        <gsmSoundDetails>
+            <sound35MmJack>No</sound35MmJack>
+            <soundLoudspeaker>Yes, with stereo speakers</soundLoudspeaker>
+            <soundOther1>Spatial Audio</soundOther1>
+            <soundOther2></soundOther2>
+        </gsmSoundDetails>
+        <gsmBatteryDetails>
+            <batteryCharging>Fast charging 20W, 50% in 30 min (advertised)&#10; 15W wireless
+                (MagSafe)</batteryCharging>
+            <batteryType>Li-Ion 4323 mAh, non-removable</batteryType>
+        </gsmBatteryDetails>
+    </specification>
+    <specification>
+        <phoneDetails>
+            <yearValue>2022</yearValue>
+            <brandValue>Google</brandValue>
+            <modelValue>Pixel 7 Pro</modelValue>
+        </phoneDetails>
+        <gsmLaunchDetails>
+            <launchAnnounced>2022, October 06</launchAnnounced>
+            <launchStatus>Available. Released 2022, October 13</launchStatus>
+        </gsmLaunchDetails>
+        <gsmBodyDetails>
+            <bodyDimensions>162.9 x 76.6 x 8.9 mm (6.41 x 3.02 x 0.35 in)</bodyDimensions>
+            <bodyWeight>212 g (7.48 oz)</bodyWeight>
+            <bodySim>Nano-SIM and eSIM</bodySim>
+            <bodyBuild>Glass front (Gorilla Glass Victus), glass back (Gorilla Glass Victus),
+                aluminum frame</bodyBuild>
+            <bodyOther1>IP68 dust/water resistant (up to 1.5m for 30 mins)</bodyOther1>
+            <bodyOther2></bodyOther2>
+            <bodyOther3></bodyOther3>
+        </gsmBodyDetails>
+        <gsmDisplayDetails>
+            <displayType>LTPO AMOLED, 120Hz, HDR10+, 1500 nits (peak)</displayType>
+            <displaySize>6.7 inches, 1440 x 3120 pixels (~512 ppi density)</displaySize>
+            <displayResolution>1440 x 3088 pixels (~500 ppi density)</displayResolution>
+            <displayProtection>Corning Gorilla Glass Victus</displayProtection>
+            <displayOther1>Always-On display</displayOther1>
+        </gsmDisplayDetails>
+        <gsmMemoryDetails>
+            <memoryCardSlot>No</memoryCardSlot>
+            <memoryInternal>128GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM</memoryInternal>
+            <memoryOther1>UFS 3.1</memoryOther1>
+        </gsmMemoryDetails>
+        <gsmSoundDetails>
+            <sound35MmJack>No</sound35MmJack>
+            <soundLoudspeaker>Yes, with stereo speakers</soundLoudspeaker>
+            <soundOther1>24-bit/192kHz audio</soundOther1>
+            <soundOther2></soundOther2>
+        </gsmSoundDetails>
+        <gsmBatteryDetails>
+            <batteryCharging>Fast charging 30W, 50% in 30 min (advertised)&#10; 23W wireless&#10;
+                Reverse wireless charging</batteryCharging>
+            <batteryType>Li-Ion 5000 mAh, non-removable</batteryType>
+        </gsmBatteryDetails>
+    </specification>
+    <specification>
+        <phoneDetails>
+            <yearValue>2017</yearValue>
+            <brandValue>Samsung</brandValue>
+            <modelValue>Galaxy S8</modelValue>
+        </phoneDetails>
+        <gsmLaunchDetails>
+            <launchAnnounced>2017, March 29. Released 2017, April 24</launchAnnounced>
+            <launchStatus>Discontinued</launchStatus>
+        </gsmLaunchDetails>
+        <gsmBodyDetails>
+            <bodyDimensions>148.9 x 68.1 x 8 mm (5.86 x 2.68 x 0.31 in)</bodyDimensions>
+            <bodyWeight>155 g (5.47 oz)</bodyWeight>
+            <bodySim>Single SIM (Nano-SIM) or Hybrid Dual SIM (Nano-SIM, dual stand-by)</bodySim>
+            <bodyBuild>Glass front (Gorilla Glass 5), glass back (Gorilla Glass 5), aluminum frame</bodyBuild>
+            <bodyOther1>IP68 dust/water resistant (up to 1.5m for 30 mins)</bodyOther1>
+            <bodyOther2></bodyOther2>
+            <bodyOther3></bodyOther3>
+        </gsmBodyDetails>
+        <gsmDisplayDetails>
+            <displayType>Super AMOLED, HDR10</displayType>
+            <displaySize>5.8 inches, 84.8 cm2 (~83.6% screen-to-body ratio)</displaySize>
+            <displayResolution>1440 x 2960 pixels, 18.5:9 ratio (~570 ppi density)</displayResolution>
+            <displayProtection>Corning Gorilla Glass 5</displayProtection>
+            <displayOther1>3D Touch (home button only)</displayOther1>
+            <displayOther2>Always-on display</displayOther2>
+        </gsmDisplayDetails>
+        <gsmMemoryDetails>
+            <memoryCardSlot>microSDXC (uses shared SIM slot) - dual SIM model only</memoryCardSlot>
+            <memoryInternal>64GB 4GB RAM</memoryInternal>
+            <memoryOther1>UFS 2.0 or UFS 2.1</memoryOther1>
+        </gsmMemoryDetails>
+        <gsmSoundDetails>
+            <sound35MmJack>Yes</sound35MmJack>
+            <soundLoudspeaker>Yes</soundLoudspeaker>
+            <soundOther1>32-bit/384kHz audio</soundOther1>
+            <soundOther2></soundOther2>
+        </gsmSoundDetails>
+        <gsmBatteryDetails>
+            <batteryCharging>15W wired, QC2 Wireless (Qi/PMA) (market dependent)</batteryCharging>
+            <batteryMusicPlay>Up to 67 h</batteryMusicPlay>
+            <batteryTalkTime>Up to 20 h (3G)</batteryTalkTime>
+            <batteryType>Li-Ion 3000 mAh, non-removable (11.55 Wh)</batteryType>
+        </gsmBatteryDetails>
+    </specification>
+</specifications>

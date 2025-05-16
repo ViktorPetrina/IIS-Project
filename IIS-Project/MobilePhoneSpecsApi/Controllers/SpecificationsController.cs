@@ -1,0 +1,116 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using MobilePhoneSpecsApi.DTOs;
+using MobilePhoneSpecsApi.Models;
+using MobilePhoneSpecsApi.Repository;
+using MobilePhoneSpecsApi.Utilities;
+using System.Xml.Linq;
+
+
+namespace MobilePhoneSpecsApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SpecificationsController : ControllerBase
+    {
+        private readonly IRepository<Specification> _repository;
+        private readonly IMapper _mapper;
+
+        private const string xsdPath = "ValidationFiles/specification.xsd";
+        private const string rngPath = "ValidationFiles/specification.rng";
+
+        public SpecificationsController(IRepository<Specification> repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var specifications = await _repository.GetAllAsync();
+            return Ok(_mapper.Map<IEnumerable<SpecificationDto>>(specifications));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
+        {
+            var specification = await _repository.GetByIdAsync(id);
+            if (specification == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<SpecificationDto>(specification));
+        }
+
+        [HttpPost]
+        [Consumes("application/xml")]
+        public async Task<IActionResult> Add(string validationType)
+        {
+            string xmlData;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                xmlData = await reader.ReadToEndAsync();
+            }
+
+            XmlValidation validation;
+            switch (validationType)
+            {
+                case "xsd":
+                    validation = XmlUtils.ValidateUsingXsd(xmlData, xsdPath);
+                    break;
+
+                case "rng":
+                    validation = XmlUtils.ValidateUsingRng(xmlData, xsdPath);
+                    break;
+
+                default:
+                    validation = new XmlValidation(true, "");
+                    break;
+            }
+
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.ErrorMessages);
+            }
+
+            var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
+            var specification = _mapper.Map<Specification>(specificationDto);
+            await _repository.AddAsync(specification);
+
+            return Ok("Specification inserted.");
+        }
+
+        [HttpPut("{id}")]
+        [Consumes("application/xml")]
+        public async Task<IActionResult> Update(long id, string validationType)
+        {
+            if (!_repository.GetAllAsync().Result.Any(s => id.Equals(s.customId)))
+                return BadRequest("No matching ids.");
+
+            string xmlData;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                xmlData = await reader.ReadToEndAsync();
+            }
+
+            var validation = XmlUtils.ValidateUsingXsd(xmlData, xsdPath);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.ErrorMessages);
+            }
+
+            var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
+            var specification = _mapper.Map<Specification>(specificationDto);
+            await _repository.UpdateAsync(specification);
+
+            return Ok("Specification updated.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            await _repository.DeleteAsync(id);
+            return Ok("Object deleted.");
+        }
+    }
+}

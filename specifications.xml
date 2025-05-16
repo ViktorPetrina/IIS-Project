@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specifications>
+    <specification>
+        <phoneDetails>
+            <yearValue>2022</yearValue>
+            <brandValue>Samsung</brandValue>
+            <modelValue>Galaxy S22 Ultra 5G</modelValue>
+        </phoneDetails>
+        <gsmLaunchDetails>
+            <launchAnnounced>2022, February 09</launchAnnounced>
+            <launchStatus>Available. Released 2022, February 25</launchStatus>
+        </gsmLaunchDetails>
+        <gsmBodyDetails>
+            <bodyDimensions>163.3 x 77.9 x 8.9 mm (6.43 x 3.07 x 0.35 in)</bodyDimensions>
+            <bodyWeight>228 g / 229 g (mmWave) (8.04 oz)</bodyWeight>
+            <bodySim>Nano-SIM and eSIM or Dual SIM (2 Nano-SIMs and eSIM, dual stand-by)</bodySim>
+            <bodyBuild>Glass front (Gorilla Glass Victus+), glass back (Gorilla Glass Victus+), aluminum frame</bodyBuild>
+            <bodyOther1>IP68 dust/water resistant (up to 1.5m for 30 mins)</bodyOther1>
+            <bodyOther2>Armor aluminum frame with tougher drop and scratch resistance (advertised)</bodyOther2>
+            <bodyOther3>Stylus, 2.8ms latency (Bluetooth integration, accelerometer, gyro)</bodyOther3>
+        </gsmBodyDetails>
+        <gsmDisplayDetails>
+            <displayType>Dynamic AMOLED 2X, 120Hz, HDR10+, 1750 nits (peak)</displayType>
+            <displaySize>6.8 inches, 114.7 cm2 (~90.2% screen-to-body ratio)</displaySize>
+            <displayResolution>1440 x 3088 pixels (~500 ppi density)</displayResolution>
+            <displayProtection>Corning Gorilla Glass Victus+</displayProtection>
+            <displayOther1>Always-On display</displayOther1>
+        </gsmDisplayDetails>
+        <gsmMemoryDetails>
+            <memoryCardSlot>No</memoryCardSlot>
+            <memoryInternal>128GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM, 1TB 12GB RAM</memoryInternal>
+            <memoryOther1>UFS 3.1</memoryOther1>
+        </gsmMemoryDetails>
+        <gsmSoundDetails>
+            <sound35MmJack>No</sound35MmJack>
+            <soundLoudspeaker>Yes, with stereo speakers</soundLoudspeaker>
+            <soundOther1>32-bit/384kHz audio</soundOther1>
+            <soundOther2>Tuned by AKG</soundOther2>
+        </gsmSoundDetails>
+        <gsmBatteryDetails>
+            <batteryCharging>45W wired, PD3.0&#10; 15W wireless (Qi/PMA)&#10; 4.5W reverse wireless</batteryCharging>
+            <batteryType>Li-Ion 5000 mAh, non-removable</batteryType>
+        </gsmBatteryDetails>
+    </specification>
+</specifications>
