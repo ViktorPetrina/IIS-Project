@@ -1,23 +1,30 @@
-﻿using System.Text;
+﻿using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
+using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace MobilePhoneSpecsApi.Utilities
 {
-    public class XmlValidation
+    public class XmlValidationResult
     {
         public bool IsValid { get; private set; }
         public string ErrorMessages { get; private set; }
 
-        public XmlValidation(bool isValid, string errorMsgs)
+        public XmlValidationResult(bool isValid, string errorMsgs)
         {
             IsValid = isValid;
             ErrorMessages = errorMsgs;
         }
     }
-
     public static class XmlUtils
     {
-        public static XmlValidation ValidateUsingXsd(string xml, string xsdPath)
+        private const string xsdPath = "ValidationFiles/specification.xsd";
+        private const string rngPath = "ValidationFiles/specification.rng";
+        private const string rngValidatorPath = @"RngValidator\RngValidatorService.jar";
+        private const string javaPath = "java";
+
+        public static XmlValidationResult ValidateUsingXsd(string xml)
         {
             bool isValid = true;
             StringBuilder errorMsgs = new StringBuilder();
@@ -25,16 +32,10 @@ namespace MobilePhoneSpecsApi.Utilities
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.Schemas.Add(null, xsdPath);
             settings.ValidationType = ValidationType.Schema;
-
             settings.ValidationEventHandler += (sender, e) =>
             {
                 isValid = false;
-                Console.WriteLine($"Validation Error: {e.Message}");
-                if (e.Exception != null)
-                {
-                    errorMsgs.Append($"Line: {e.Exception.LineNumber}, Position: {e.Exception.LinePosition}");
-                }
-
+                errorMsgs.Append($"Validation Error: {e.Message}");
             };
 
             using (StringReader stringReader = new StringReader(xml))
@@ -47,50 +48,68 @@ namespace MobilePhoneSpecsApi.Utilities
                 catch (XmlException ex)
                 {
                     isValid = false;
-                    errorMsgs.Append($"XML Exception: {ex.Message} at Line {ex.LineNumber}, Position {ex.LinePosition}");
+                    errorMsgs.Append($"Deserializing error: {ex.Message}");
                 }
-
             }
 
-            return new XmlValidation(isValid, errorMsgs.ToString());
+            return new XmlValidationResult(isValid, errorMsgs.ToString());
         }
 
-        public static XmlValidation ValidateUsingRng(string xml, string rngPath)
+        public static XmlValidationResult ValidateUsingRng(string xmlContent)
         {
             bool isValid = true;
             StringBuilder errorMsgs = new StringBuilder();
+            string tempFilePath = Path.GetTempFileName();
 
-            var process = new System.Diagnostics.Process
+            try
             {
-                StartInfo = new System.Diagnostics.ProcessStartInfo
+                File.WriteAllText(tempFilePath, xmlContent);
+
+                var process = new Process
                 {
-                    FileName = "java",
-                    Arguments = $"-jar jing.jar {rngPath} {xmlPath}",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = javaPath,
+                        Arguments = $"-jar \"{rngValidatorPath}\" \"{rngPath}\" \"{tempFilePath}\"",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+
+                string output = process.StandardOutput.ReadToEnd();
+                string errors = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+                if (process.ExitCode != 0)
+                {
+                    isValid = false;
+                    errorMsgs.AppendLine(errors);
                 }
-            };
-
-            process.Start();
-            string output = process.StandardOutput.ReadToEnd();
-            string errors = process.StandardError.ReadToEnd();
-            process.WaitForExit();
-
-            if (!string.IsNullOrEmpty(errors))
+            }
+            catch (Exception ex)
             {
                 isValid = false;
-                errorMsgs.Append(errors);
+                errorMsgs.AppendLine($"Exception during validation: {ex.Message}");
+            }
+            finally
+            {
+                if (File.Exists(tempFilePath)) File.Delete(tempFilePath);
             }
 
-            return new XmlValidation(isValid, errorMsgs.ToString());
+            return new XmlValidationResult(isValid, errorMsgs.ToString());
         }
+
 
         public static T DeserializeXml<T>(string xml)
         {
             using (StringReader stringReader = new StringReader(xml))
             {
-                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+                var serializer = new XmlSerializer(typeof(T));
 
                 if (serializer.Deserialize(stringReader) is T serialized)
                 {

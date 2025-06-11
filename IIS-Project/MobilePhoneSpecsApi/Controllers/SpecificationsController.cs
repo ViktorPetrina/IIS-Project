@@ -16,9 +16,6 @@ namespace MobilePhoneSpecsApi.Controllers
         private readonly IRepository<Specification> _repository;
         private readonly IMapper _mapper;
 
-        private const string xsdPath = "ValidationFiles/specification.xsd";
-        private const string rngPath = "ValidationFiles/specification.rng";
-
         public SpecificationsController(IRepository<Specification> repository, IMapper mapper)
         {
             _repository = repository;
@@ -35,11 +32,15 @@ namespace MobilePhoneSpecsApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(long id)
         {
-            var specification = await _repository.GetByIdAsync(id);
-            if (specification == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<SpecificationDto>(specification));
+            try
+            {
+                var specification = await _repository.GetByIdAsync(id);
+                return Ok(_mapper.Map<SpecificationDto>(specification));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPost]
@@ -52,19 +53,19 @@ namespace MobilePhoneSpecsApi.Controllers
                 xmlData = await reader.ReadToEndAsync();
             }
 
-            XmlValidation validation;
+            XmlValidationResult validation;
             switch (validationType)
             {
                 case "xsd":
-                    validation = XmlUtils.ValidateUsingXsd(xmlData, xsdPath);
+                    validation = XmlUtils.ValidateUsingXsd(xmlData);
                     break;
 
                 case "rng":
-                    validation = XmlUtils.ValidateUsingRng(xmlData, xsdPath);
+                    validation = XmlUtils.ValidateUsingRng(xmlData);
                     break;
 
                 default:
-                    validation = new XmlValidation(true, "");
+                    validation = new XmlValidationResult(false, "Invalid validation type.");
                     break;
             }
 
@@ -93,7 +94,7 @@ namespace MobilePhoneSpecsApi.Controllers
                 xmlData = await reader.ReadToEndAsync();
             }
 
-            var validation = XmlUtils.ValidateUsingXsd(xmlData, xsdPath);
+            var validation = XmlUtils.ValidateUsingXsd(xmlData);
             if (!validation.IsValid)
             {
                 return BadRequest(validation.ErrorMessages);

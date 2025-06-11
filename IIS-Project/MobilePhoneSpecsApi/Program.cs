@@ -17,9 +17,7 @@ namespace MobilePhoneSpecsApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<SpecificationsDbContext>(options => {
-                options.UseNpgsql("name=ConnectionStrings:postgres");
-            });
+            builder.Services.AddDbContext<SpecificationsDbContext>();
 
             builder.Services.AddScoped<IRepository<Specification>, SpecificationsRepository>();
 

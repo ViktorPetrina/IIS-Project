@@ -19,7 +19,7 @@ namespace MobilePhoneSpecsApi.Models
       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("name=ConnectionStrings:postgres");
+            optionsBuilder.UseSqlServer("name=ConnectionStrings:msSql");
         }
     }
 }

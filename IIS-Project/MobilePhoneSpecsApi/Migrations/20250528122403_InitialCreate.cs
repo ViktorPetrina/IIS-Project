@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace MobilePhoneSpecsApi.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +15,9 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    battery_charging = table.Column<string>(type: "text", nullable: false),
-                    battery_type = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    battery_charging = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    battery_type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,14 +29,14 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    body_dimensions = table.Column<string>(type: "text", nullable: false),
-                    body_weight = table.Column<string>(type: "text", nullable: false),
-                    body_sim = table.Column<string>(type: "text", nullable: false),
-                    body_build = table.Column<string>(type: "text", nullable: false),
-                    body_other1 = table.Column<string>(type: "text", nullable: false),
-                    body_other2 = table.Column<string>(type: "text", nullable: false),
-                    body_other3 = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    body_dimensions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_weight = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_sim = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_build = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_other1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_other2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    body_other3 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,12 +48,12 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    display_type = table.Column<string>(type: "text", nullable: false),
-                    display_size = table.Column<string>(type: "text", nullable: false),
-                    display_resolution = table.Column<string>(type: "text", nullable: false),
-                    display_protection = table.Column<string>(type: "text", nullable: false),
-                    display_other1 = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    display_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    display_size = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    display_resolution = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    display_protection = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    display_other1 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,9 +65,9 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    launch_announced = table.Column<string>(type: "text", nullable: false),
-                    launch_status = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    launch_announced = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    launch_status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,10 +79,10 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    memory_card_slot = table.Column<string>(type: "text", nullable: false),
-                    memory_internal = table.Column<string>(type: "text", nullable: false),
-                    memory_other1 = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    memory_card_slot = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    memory_internal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    memory_other1 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,11 +94,11 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    sound_35mm_jack = table.Column<string>(type: "text", nullable: false),
-                    sound_loudspeaker = table.Column<string>(type: "text", nullable: false),
-                    sound_other1 = table.Column<string>(type: "text", nullable: false),
-                    sound_other2 = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    sound_35mm_jack = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    sound_loudspeaker = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    sound_other1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    sound_other2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,10 +110,10 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    year_value = table.Column<string>(type: "text", nullable: false),
-                    brand_value = table.Column<string>(type: "text", nullable: false),
-                    model_value = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    year_value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    brand_value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    model_value = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,7 +125,7 @@ namespace MobilePhoneSpecsApi.Migrations
                 columns: table => new
                 {
                     custom_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     phone_details_id = table.Column<long>(type: "bigint", nullable: false),
                     gsm_launch_details_id = table.Column<long>(type: "bigint", nullable: false),
                     gsm_body_details_id = table.Column<long>(type: "bigint", nullable: false),
