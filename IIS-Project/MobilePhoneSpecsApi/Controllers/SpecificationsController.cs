@@ -4,6 +4,7 @@ using MobilePhoneSpecsApi.DTOs;
 using MobilePhoneSpecsApi.Models;
 using MobilePhoneSpecsApi.Repository;
 using MobilePhoneSpecsApi.Utilities;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
 
@@ -53,6 +54,49 @@ namespace MobilePhoneSpecsApi.Controllers
                 xmlData = await reader.ReadToEndAsync();
             }
 
+            XmlValidationResult validationResult;
+            switch (validationType)
+            {
+                case "xsd":
+                    validationResult = XmlUtils.ValidateUsingXsd(xmlData);
+                    break;
+
+                case "rng":
+                    validationResult = XmlUtils.ValidateUsingRng(xmlData);
+                    break;
+
+                default:
+                    validationResult = new XmlValidationResult(false, "Invalid validation type.");
+                    break;
+            }
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.ErrorMessages);
+            }
+
+            var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
+            var specification = _mapper.Map<Specification>(specificationDto);
+            await _repository.AddAsync(specification);
+
+            return Ok("Specification inserted.");
+        }
+
+        [HttpPut("{id}")]
+        [Consumes("application/xml")]
+        public async Task<IActionResult> Update(long id, string validationType)
+        {
+            if (!_repository.GetAllAsync().Result.Any(s => id.Equals(s.customId)))
+            {
+                return BadRequest("No matching ids.");
+            }
+                
+            string xmlData;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                xmlData = await reader.ReadToEndAsync();
+            }
+
             XmlValidationResult validation;
             switch (validationType)
             {
@@ -76,32 +120,6 @@ namespace MobilePhoneSpecsApi.Controllers
 
             var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
             var specification = _mapper.Map<Specification>(specificationDto);
-            await _repository.AddAsync(specification);
-
-            return Ok("Specification inserted.");
-        }
-
-        [HttpPut("{id}")]
-        [Consumes("application/xml")]
-        public async Task<IActionResult> Update(long id, string validationType)
-        {
-            if (!_repository.GetAllAsync().Result.Any(s => id.Equals(s.customId)))
-                return BadRequest("No matching ids.");
-
-            string xmlData;
-            using (var reader = new StreamReader(Request.Body))
-            {
-                xmlData = await reader.ReadToEndAsync();
-            }
-
-            var validation = XmlUtils.ValidateUsingXsd(xmlData);
-            if (!validation.IsValid)
-            {
-                return BadRequest(validation.ErrorMessages);
-            }
-
-            var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
-            var specification = _mapper.Map<Specification>(specificationDto);
             await _repository.UpdateAsync(specification);
 
             return Ok("Specification updated.");
@@ -110,6 +128,11 @@ namespace MobilePhoneSpecsApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
+            if (!_repository.GetAllAsync().Result.Any(ps => ps.customId.Equals(id)))
+            {
+                return NotFound("No object with provided id");
+            }
+
             await _repository.DeleteAsync(id);
             return Ok("Object deleted.");
         }
