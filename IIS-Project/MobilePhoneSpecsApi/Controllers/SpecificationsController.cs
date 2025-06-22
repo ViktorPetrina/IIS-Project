@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MobilePhoneSpecsApi.DTOs;
 using MobilePhoneSpecsApi.Models;
 using MobilePhoneSpecsApi.Repository;
 using MobilePhoneSpecsApi.Utilities;
-using System.Reflection.Metadata.Ecma335;
-using System.Xml.Linq;
-
 
 namespace MobilePhoneSpecsApi.Controllers
 {
@@ -27,6 +25,12 @@ namespace MobilePhoneSpecsApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var specifications = await _repository.GetAllAsync();
+
+            if (specifications.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             return Ok(_mapper.Map<IEnumerable<SpecificationDto>>(specifications));
         }
 

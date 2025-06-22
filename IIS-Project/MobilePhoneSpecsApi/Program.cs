@@ -1,8 +1,9 @@
-
 using Microsoft.EntityFrameworkCore;
 using MobilePhoneSpecsApi.AutoMapper;
 using MobilePhoneSpecsApi.Models;
 using MobilePhoneSpecsApi.Repository;
+using MobilePhoneSpecsApi.SOAP;
+using SoapCore;
 using System.Reflection;
 
 namespace MobilePhoneSpecsApi
@@ -16,11 +17,10 @@ namespace MobilePhoneSpecsApi
             builder.Services.AddControllers().AddXmlSerializerFormatters();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddSoapCore();
             builder.Services.AddDbContext<SpecificationsDbContext>();
-
+            builder.Services.AddSingleton<ISearchService, SpecificationSearchService>();
             builder.Services.AddScoped<IRepository<Specification>, SpecificationsRepository>();
-
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var app = builder.Build();
@@ -33,6 +33,9 @@ namespace MobilePhoneSpecsApi
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
+
+            app.UseSoapEndpoint<ISearchService>("/SpecificationSearchService.asmx", new SoapEncoderOptions());
+
             app.MapControllers();
 
             app.Run();
