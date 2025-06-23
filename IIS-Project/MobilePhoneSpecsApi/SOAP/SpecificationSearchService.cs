@@ -1,5 +1,7 @@
 ﻿using MobilePhoneSpecsApi.DTOs;
 using MobilePhoneSpecsApi.Utilities;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Xml;
 
 namespace MobilePhoneSpecsApi.SOAP
@@ -15,11 +17,10 @@ namespace MobilePhoneSpecsApi.SOAP
             await SaveEntitiesToXmlAsync();
 
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(Path.Combine(DIRECTORY_NAME, "data.xml"));
-
+            xmlDoc.Load(GetFilePath());
+            
             string xpath = $"//specification[phoneDetails/modelValue[contains(., '{query}')]]";
             var matchedNodes = xmlDoc.SelectNodes(xpath);
-
             var result = new List<SpecificationDto>();
 
             if (matchedNodes == null)
@@ -43,17 +44,16 @@ namespace MobilePhoneSpecsApi.SOAP
         public async Task SaveEntitiesToXmlAsync()
         {
             HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             HttpResponseMessage response = await client.GetAsync(API_CALL); 
 
             if (response.IsSuccessStatusCode)
             {
                 string xmlContent = await response.Content.ReadAsStringAsync();
-
-                string directoryPath = Path.Combine(AppContext.BaseDirectory, DIRECTORY_NAME);
-                string xmlPath = Path.Combine(directoryPath, XML_FILE_NAME);
-
-                await File.WriteAllTextAsync(xmlPath, xmlContent);
+                await File.WriteAllTextAsync(GetFilePath(), xmlContent);
             }
         }
+
+        private string GetFilePath() => Path.Combine(Path.GetFullPath(DIRECTORY_NAME), XML_FILE_NAME);
     }
 }

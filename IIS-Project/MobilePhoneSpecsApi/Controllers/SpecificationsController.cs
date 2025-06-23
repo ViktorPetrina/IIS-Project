@@ -31,7 +31,10 @@ namespace MobilePhoneSpecsApi.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<IEnumerable<SpecificationDto>>(specifications));
+            var mapped = _mapper.Map<List<SpecificationDto>>(specifications);
+            var wrapped = new SpecificationDtoList { Items = mapped };
+
+            return Ok(wrapped);
         }
 
         [HttpGet("{id}")]
