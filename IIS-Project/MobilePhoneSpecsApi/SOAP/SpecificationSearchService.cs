@@ -18,7 +18,13 @@ namespace MobilePhoneSpecsApi.SOAP
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(GetFilePath());
-            
+
+            var validationResult = XmlUtils.ValidateUsingJar(xmlDoc.InnerXml, "xsd");
+            if (!validationResult.IsValid) 
+            {
+                throw new XmlException("Invalid xml, errors: " + validationResult.ErrorMessages);
+            }
+
             string xpath = $"//specification[phoneDetails/modelValue[contains(., '{query}')]]";
             var matchedNodes = xmlDoc.SelectNodes(xpath);
             var result = new List<SpecificationDto>();

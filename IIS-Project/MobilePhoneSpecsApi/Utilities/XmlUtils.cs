@@ -20,8 +20,10 @@ namespace MobilePhoneSpecsApi.Utilities
     public static class XmlUtils
     {
         private const string xsdPath = "ValidationFiles/specification.xsd";
+        private const string multipleEntitiesXsdPath = "ValidationFiles/specifications.xsd";
         private const string rngPath = "ValidationFiles/specification.rng";
-        private const string rngValidatorPath = @"RngValidator\RngValidatorService.jar";
+        private const string rngValidatorPath = @"JARs\RngValidatorService.jar";
+        private const string xsdValidatorPath = @"JARs\XsdValidatorService.jar";
         private const string javaPath = "java";
 
         public static XmlValidationResult ValidateUsingXsd(string xml)
@@ -55,7 +57,7 @@ namespace MobilePhoneSpecsApi.Utilities
             return new XmlValidationResult(isValid, errorMsgs.ToString());
         }
 
-        public static XmlValidationResult ValidateUsingRng(string xmlContent)
+        public static XmlValidationResult ValidateUsingJar(string xmlContent, string type)
         {
             bool isValid = true;
             StringBuilder errorMsgs = new StringBuilder();
@@ -65,18 +67,30 @@ namespace MobilePhoneSpecsApi.Utilities
             {
                 File.WriteAllText(tempFilePath, xmlContent);
 
-                var process = new Process
+                var process = new Process()
                 {
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = javaPath,
-                        Arguments = $"-jar \"{rngValidatorPath}\" \"{rngPath}\" \"{tempFilePath}\"",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         UseShellExecute = false,
                         CreateNoWindow = true
                     }
                 };
+
+                switch (type)
+                {
+                    case "rng":
+                        process.StartInfo.Arguments = $"-jar \"{rngValidatorPath}\" \"{rngPath}\" \"{tempFilePath}\"";
+                    break;
+
+                    case "xsd":
+                        process.StartInfo.Arguments = $"-jar \"{xsdValidatorPath}\" \"{multipleEntitiesXsdPath}\" \"{tempFilePath}\"";
+                    break;
+
+                    default: throw new XmlException("Invalid validation type.");
+                }
 
                 process.Start();
 
@@ -103,7 +117,6 @@ namespace MobilePhoneSpecsApi.Utilities
 
             return new XmlValidationResult(isValid, errorMsgs.ToString());
         }
-
 
         public static T DeserializeXml<T>(string xml)
         {

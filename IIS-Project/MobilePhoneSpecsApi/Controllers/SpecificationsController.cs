@@ -69,7 +69,7 @@ namespace MobilePhoneSpecsApi.Controllers
                     break;
 
                 case "rng":
-                    validationResult = XmlUtils.ValidateUsingRng(xmlData);
+                    validationResult = XmlUtils.ValidateUsingJar(xmlData, "rng");
                     break;
 
                 default:
@@ -112,7 +112,7 @@ namespace MobilePhoneSpecsApi.Controllers
                     break;
 
                 case "rng":
-                    validation = XmlUtils.ValidateUsingRng(xmlData);
+                    validation = XmlUtils.ValidateUsingJar(xmlData, "rng");
                     break;
 
                 default:

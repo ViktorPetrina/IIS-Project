@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="specifications">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" name="specification">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="phoneDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="yearValue" type="xsd:unsignedShort" />
+                    <xsd:element name="brandValue" type="xsd:string" />
+                    <xsd:element name="modelValue" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmLaunchDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="launchAnnounced" type="xsd:string" />
+                    <xsd:element name="launchStatus" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmBodyDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="bodyDimensions" type="xsd:string" />
+                    <xsd:element name="bodyWeight" type="xsd:string" />
+                    <xsd:element name="bodySim" type="xsd:string" />
+                    <xsd:element name="bodyBuild" type="xsd:string" />
+                    <xsd:element name="bodyOther1" type="xsd:string" />
+                    <xsd:element name="bodyOther2" type="xsd:string" />
+                    <xsd:element name="bodyOther3" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmDisplayDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="displayType" type="xsd:string" />
+                    <xsd:element name="displaySize" type="xsd:string" />
+                    <xsd:element name="displayResolution" type="xsd:string" />
+                    <xsd:element name="displayProtection" type="xsd:string" />
+                    <xsd:element name="displayOther1" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmMemoryDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="memoryCardSlot" type="xsd:string" />
+                    <xsd:element name="memoryInternal" type="xsd:string" />
+                    <xsd:element name="memoryOther1" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmSoundDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="sound35MmJack" type="xsd:string" />
+                    <xsd:element name="soundLoudspeaker" type="xsd:string" />
+                    <xsd:element name="soundOther1" type="xsd:string" />
+                    <xsd:element name="soundOther2" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="gsmBatteryDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="batteryCharging" type="xsd:string" />
+                    <xsd:element name="batteryType" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>
