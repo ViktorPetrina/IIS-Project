@@ -6,8 +6,8 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class Main {
@@ -17,16 +17,18 @@ public class Main {
         XmlRpcClient client = new XmlRpcClient();
         client.setConfig(config);
 
-        String cityName = "Za";
+        String cityName = "";
         Object[] params = new Object[] { cityName };
 
-        List<Map<String, Object>> result = (List<Map<String, Object>>) client.execute(
-                "WeatherSearchService.getTempByCityName",
+        Object[] response = (Object[]) client.execute(
+                "WeatherSearchServer.getTempByCityName",
                 params
         );
 
-        for (Map<String, Object> city : result) {
-            System.out.println(city.get("cityName") + ": " + city.get("temperature") + "°C");
-        }
+        List<Double> result = Arrays.stream(response)
+                .map(Double.class::cast)
+                .toList();
+
+        result.forEach(System.out::println);
     }
 }

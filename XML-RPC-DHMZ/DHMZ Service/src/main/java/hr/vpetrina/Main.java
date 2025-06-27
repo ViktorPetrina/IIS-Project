@@ -1,6 +1,6 @@
 package hr.vpetrina;
 
-import hr.vpetrina.service.WeatherSearchService;
+import hr.vpetrina.service.WeatherSearchServer;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServer;
@@ -14,7 +14,7 @@ public class Main {
         XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
         PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
-        phm.addHandler("WeatherSearchService", WeatherSearchService.class);
+        phm.addHandler("WeatherSearchServer", WeatherSearchServer.class);
         xmlRpcServer.setHandlerMapping(phm);
 
         webServer.start();
