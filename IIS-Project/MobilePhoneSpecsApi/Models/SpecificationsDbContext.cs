@@ -12,6 +12,8 @@ namespace MobilePhoneSpecsApi.Models
         public DbSet<GsmMemoryDetails> GsmMemoryDetails { get; set; }
         public DbSet<GsmSoundDetails> GsmSoundDetails { get; set; }
         public DbSet<GsmBatteryDetails> GsmBatteryDetails { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
         public SpecificationsDbContext() { }
 

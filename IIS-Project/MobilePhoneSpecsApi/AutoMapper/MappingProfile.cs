@@ -16,6 +16,7 @@ namespace MobilePhoneSpecsApi.AutoMapper
             CreateMap<GsmSoundDetails, GsmSoundDetailsDto>().ReverseMap();
             CreateMap<GsmBatteryDetails, GsmBatteryDetailsDto>().ReverseMap();
             CreateMap<GsmMemoryDetails, GsmMemoryDetailsDto>().ReverseMap();
+            CreateMap<User, UserDto>();
         }
     }
 }

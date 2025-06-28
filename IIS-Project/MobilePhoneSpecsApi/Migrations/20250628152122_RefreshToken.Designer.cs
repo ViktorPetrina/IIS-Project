@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MobilePhoneSpecsApi.Models;
 
@@ -11,9 +12,11 @@ using MobilePhoneSpecsApi.Models;
 namespace MobilePhoneSpecsApi.Migrations
 {
     [DbContext(typeof(SpecificationsDbContext))]
-    partial class SpecificationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250628152122_RefreshToken")]
+    partial class RefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,27 +334,6 @@ namespace MobilePhoneSpecsApi.Migrations
                     b.HasIndex("phoneDetailsId");
 
                     b.ToTable("Specifications");
-                });
-
-            modelBuilder.Entity("MobilePhoneSpecsApi.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MobilePhoneSpecsApi.Models.Specification", b =>

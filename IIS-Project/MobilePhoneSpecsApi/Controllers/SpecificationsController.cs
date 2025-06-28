@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MobilePhoneSpecsApi.DTOs;
@@ -10,6 +11,7 @@ namespace MobilePhoneSpecsApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] 
     public class SpecificationsController : ControllerBase
     {
         private readonly IRepository<Specification> _repository;
@@ -26,7 +28,7 @@ namespace MobilePhoneSpecsApi.Controllers
         {
             var specifications = await _repository.GetAllAsync();
 
-            if (specifications.IsNullOrEmpty())
+            if (specifications.Count().Equals(0))
             {
                 return NotFound();
             }
