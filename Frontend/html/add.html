@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Insert Specification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <div id="header"></div>
+
+    <div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow">
+        <h2 class="text-2xl font-bold mb-4 text-indigo-600">Insert Specification XML</h2>
+        
+        <label class="block mb-2 font-semibold text-gray-700">Validation Type</label>
+        <select id="validationType" class="mb-4 w-full p-2 border rounded">
+            <option value="xsd">XSD</option>
+            <option value="rng">RNG</option>
+        </select>
+
+        <textarea id="xmlInput" class="w-full h-64 p-3 border rounded mb-4" placeholder="Paste XML here..."></textarea>
+        
+        <button id="submitBtn" class="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition">
+            Submit
+        </button>
+
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <script>
+        const submitBtn = document.getElementById('submitBtn');
+        const resultDiv = document.getElementById('result');
+
+        submitBtn.addEventListener('click', async () => {
+            const xmlData = document.getElementById('xmlInput').value.trim();
+            const validationType = document.getElementById('validationType').value;
+
+            if (!xmlData) {
+                resultDiv.innerHTML = "<p class='text-red-600'>Please enter some XML data.</p>";
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5095/api/Specifications?validationType=${encodeURIComponent(validationType)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/xml',
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+                    },
+                    body: xmlData
+                });
+
+                if (response.ok) {
+                    resultDiv.innerHTML = "<p class='text-green-600 font-semibold'>Specification inserted successfully!</p>";
+                } else {
+                    const errorText = await response.text();
+                    resultDiv.innerHTML = `<pre class='text-red-600 whitespace-pre-wrap'>${escapeHtml(errorText)}</pre>`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = "<p class='text-red-600'>Error connecting to server.</p>";
+            }
+        });
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

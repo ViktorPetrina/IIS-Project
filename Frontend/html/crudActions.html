@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Phone Specifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <header class="bg-indigo-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Phone Specifications Manager</h1>
+        <p class="mt-2 text-lg">Choose an action below to manage your phone specifications</p>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-center p-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-5xl">
+
+            <a href="browse.html"
+                class="bg-white shadow hover:shadow-lg transition rounded-xl p-6 text-center border border-gray-200 hover:bg-gray-50">
+                <h2 class="text-xl font-semibold mb-2">Browse Specifications</h2>
+                <p class="text-gray-600">View the full list of phone specifications.</p>
+            </a>
+
+            <a href="add.html"
+                class="bg-white shadow hover:shadow-lg transition rounded-xl p-6 text-center border border-gray-200 hover:bg-gray-50">
+                <h2 class="text-xl font-semibold mb-2">Add Specification</h2>
+                <p class="text-gray-600">Insert a new phone specification into the database.</p>
+            </a>
+
+            <a href="#update"
+                class="bg-white shadow hover:shadow-lg transition rounded-xl p-6 text-center border border-gray-200 hover:bg-gray-50">
+                <h2 class="text-xl font-semibold mb-2">Update Specification</h2>
+                <p class="text-gray-600">Modify details of an existing phone specification.</p>
+            </a>
+
+            <a href="#delete"
+                class="bg-white shadow hover:shadow-lg transition rounded-xl p-6 text-center border border-gray-200 hover:bg-gray-50">
+                <h2 class="text-xl font-semibold mb-2">Delete Specification</h2>
+                <p class="text-gray-600">Remove a phone specification from the database.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 text-center p-4 text-gray-600">
+        &copy; <span id="year"></span> Phone Specifications App
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

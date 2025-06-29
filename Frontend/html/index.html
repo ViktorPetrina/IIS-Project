@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Specifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <section
+        class="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col items-center justify-center p-8">
+        <h1 class="text-5xl font-bold mb-4">Phone Specifications</h1>
+        <p class="text-xl mb-6 text-center max-w-2xl">
+            Discover and manage detailed phone specifications easily. The ultimate tool for phone enthusiasts and
+            resellers.
+        </p>
+        <a href="crudActions.html"
+            class="bg-white text-indigo-600 px-6 py-3 rounded-full text-lg font-semibold shadow hover:bg-gray-100 transition">
+            Get Started
+        </a>
+    </section>
+
+    <section id="features" class="py-16 px-8 grid md:grid-cols-3 gap-8 text-center">
+        <div>
+            <h2 class="text-2xl font-bold mb-2">Extensive Database</h2>
+            <p class="text-gray-600">Thousands of phone models with detailed specs.</p>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold mb-2">Manage Specifications</h2>
+            <p class="text-gray-600">Easily update, add, browse, and delete phone specifications through a simple
+                interface.</p>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold mb-2">For Enthusiasts & Sellers</h2>
+            <p class="text-gray-600">Designed to streamline your workflow whether you're exploring phones or managing an
+                inventory.</p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-100 text-center p-4 text-gray-600">
+        &copy; <span id="year"></span> Phone Specifications App. All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
