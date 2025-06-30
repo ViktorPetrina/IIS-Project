@@ -47,11 +47,57 @@ namespace MobilePhoneSpecsApi.Repository
             await SaveAsync();
         }
 
-        public async Task UpdateAsync(Specification specification)
+        public async Task UpdateAsync(long id, Specification updatedSpec)
         {
-            _specificationSet.Update(specification);
-            await SaveAsync();
+            var existingSpec = await _context.Specifications
+                .Include(s => s.phoneDetails)
+                .Include(s => s.gsmLaunchDetails)
+                .Include(s => s.gsmBodyDetails)
+                .Include(s => s.gsmDisplayDetails)
+                .Include(s => s.gsmMemoryDetails)
+                .Include(s => s.gsmSoundDetails)
+                .Include(s => s.gsmBatteryDetails)
+                .FirstOrDefaultAsync(s => s.customId == id);
+
+            if (existingSpec == null)
+                throw new KeyNotFoundException("Specification not found.");
+
+            existingSpec.phoneDetails.yearValue = updatedSpec.phoneDetails.yearValue;
+            existingSpec.phoneDetails.brandValue = updatedSpec.phoneDetails.brandValue;
+            existingSpec.phoneDetails.modelValue = updatedSpec.phoneDetails.modelValue;
+
+            existingSpec.gsmLaunchDetails.launchAnnounced = updatedSpec.gsmLaunchDetails.launchAnnounced;
+            existingSpec.gsmLaunchDetails.launchStatus = updatedSpec.gsmLaunchDetails.launchStatus;
+
+            existingSpec.gsmBodyDetails.bodyDimensions = updatedSpec.gsmBodyDetails.bodyDimensions;
+            existingSpec.gsmBodyDetails.bodyWeight = updatedSpec.gsmBodyDetails.bodyWeight;
+            existingSpec.gsmBodyDetails.bodySim = updatedSpec.gsmBodyDetails.bodySim;
+            existingSpec.gsmBodyDetails.bodyBuild = updatedSpec.gsmBodyDetails.bodyBuild;
+            existingSpec.gsmBodyDetails.bodyOther1 = updatedSpec.gsmBodyDetails.bodyOther1;
+            existingSpec.gsmBodyDetails.bodyOther2 = updatedSpec.gsmBodyDetails.bodyOther2;
+            existingSpec.gsmBodyDetails.bodyOther3 = updatedSpec.gsmBodyDetails.bodyOther3;
+
+            existingSpec.gsmDisplayDetails.displayType = updatedSpec.gsmDisplayDetails.displayType;
+            existingSpec.gsmDisplayDetails.displaySize = updatedSpec.gsmDisplayDetails.displaySize;
+            existingSpec.gsmDisplayDetails.displayResolution = updatedSpec.gsmDisplayDetails.displayResolution;
+            existingSpec.gsmDisplayDetails.displayProtection = updatedSpec.gsmDisplayDetails.displayProtection;
+            existingSpec.gsmDisplayDetails.displayOther1 = updatedSpec.gsmDisplayDetails.displayOther1;
+
+            existingSpec.gsmMemoryDetails.memoryCardSlot = updatedSpec.gsmMemoryDetails.memoryCardSlot;
+            existingSpec.gsmMemoryDetails.memoryInternal = updatedSpec.gsmMemoryDetails.memoryInternal;
+            existingSpec.gsmMemoryDetails.memoryOther1 = updatedSpec.gsmMemoryDetails.memoryOther1;
+
+            existingSpec.gsmSoundDetails.sound35MmJack = updatedSpec.gsmSoundDetails.sound35MmJack;
+            existingSpec.gsmSoundDetails.soundLoudspeaker = updatedSpec.gsmSoundDetails.soundLoudspeaker;
+            existingSpec.gsmSoundDetails.soundOther1 = updatedSpec.gsmSoundDetails.soundOther1;
+            existingSpec.gsmSoundDetails.soundOther2 = updatedSpec.gsmSoundDetails.soundOther2;
+
+            existingSpec.gsmBatteryDetails.batteryCharging = updatedSpec.gsmBatteryDetails.batteryCharging;
+            existingSpec.gsmBatteryDetails.batteryType = updatedSpec.gsmBatteryDetails.batteryType;
+
+            await _context.SaveChangesAsync();
         }
+
 
         public async Task DeleteAsync(long id)
         {

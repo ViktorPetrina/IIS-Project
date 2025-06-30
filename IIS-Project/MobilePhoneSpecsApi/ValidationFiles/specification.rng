@@ -57,9 +57,6 @@
         <element name="displayOther1">
             <text />
         </element>
-        <element name="displayOther2">
-            <text />
-        </element>
     </element>
     <element name="gsmMemoryDetails">
         <element name="memoryCardSlot">
@@ -88,12 +85,6 @@
     </element>
     <element name="gsmBatteryDetails">
         <element name="batteryCharging">
-            <text />
-        </element>
-        <element name="batteryMusicPlay">
-            <text />
-        </element>
-        <element name="batteryTalkTime">
             <text />
         </element>
         <element name="batteryType">

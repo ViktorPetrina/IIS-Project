@@ -61,6 +61,12 @@ namespace MobilePhoneSpecsApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(policy => policy
+                .WithOrigins("http://127.0.0.1:5500")
+                .AllowCredentials()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
             app.UseCors("AllowFrontend");
             app.UseHttpsRedirection();
             app.UseAuthentication();

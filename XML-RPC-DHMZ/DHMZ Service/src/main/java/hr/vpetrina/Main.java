@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws XmlRpcException, IOException {
-        WebServer webServer = new WebServer(8080);
+        WebServer webServer = new WebServer(8081);
         XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
         PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
@@ -18,6 +18,6 @@ public class Main {
         xmlRpcServer.setHandlerMapping(phm);
 
         webServer.start();
-        System.out.println("XML-RPC Server started on port 8080");
+        System.out.println("XML-RPC Server started on port 8081");
     }
 }

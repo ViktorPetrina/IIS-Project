@@ -15,78 +15,21 @@
     <div class="max-w-4xl mx-auto p-6">
         <h2 class="text-4xl font-bold mb-8 text-center text-indigo-600">Specifications</h2>
 
+        <div class="max-w-md mx-auto mb-6 flex space-x-2">
+            <input id="searchInput" type="text" placeholder="Search phone model..."
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+            <button id="searchBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 rounded-md">
+                Search
+            </button>
+        </div>
+
         <div id="specList" class="space-y-4">
             <!-- Specifikacije... -->
         </div>
     </div>
     <script src="../js/auth.js"></script>
     <script src="../js/header.js"></script>
-    <script>
-        const apiUrl = "http://localhost:5095/api/Specifications";
-        const token = localStorage.getItem("accessToken") || "";
-
-        async function fetchSpecifications() {
-            try {
-                const response = await fetch(apiUrl, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Accept": "application/xml"
-                    }
-                });
-                const xmlText = await response.text();
-                parseAndRender(xmlText);
-            } catch (err) {
-                console.error("Error fetching specifications:", err);
-            }
-        }
-
-        function parseAndRender(xmlText) {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, "application/xml");
-            const specs = xmlDoc.getElementsByTagName("specification");
-
-            const specList = document.getElementById("specList");
-            specList.innerHTML = "";
-
-            Array.from(specs).forEach(spec => {
-                const phoneDetails = spec.getElementsByTagName("phoneDetails")[0];
-                const yearValue = phoneDetails?.getElementsByTagName("yearValue")[0]?.textContent ?? "-";
-                const brandValue = phoneDetails?.getElementsByTagName("brandValue")[0]?.textContent ?? "-";
-                const modelValue = phoneDetails?.getElementsByTagName("modelValue")[0]?.textContent ?? "-";
-
-                const detailsHtml = `
-                    <div class="ml-4 mt-2 space-y-1 text-sm text-gray-600 hidden details">
-                        <div><strong>Year:</strong> ${yearValue}</div>
-                        <div><strong>Launch:</strong> ${spec.getElementsByTagName("launchAnnounced")[0]?.textContent ?? "-"}</div>
-                        <div><strong>Status:</strong> ${spec.getElementsByTagName("launchStatus")[0]?.textContent ?? "-"}</div>
-                        <div><strong>Body:</strong> ${spec.getElementsByTagName("bodyDimensions")[0]?.textContent ?? "-"}, ${spec.getElementsByTagName("bodyWeight")[0]?.textContent ?? "-"}</div>
-                        <div><strong>Display:</strong> ${spec.getElementsByTagName("displayType")[0]?.textContent ?? "-"}, ${spec.getElementsByTagName("displaySize")[0]?.textContent ?? "-"}</div>
-                        <div><strong>Memory:</strong> ${spec.getElementsByTagName("memoryInternal")[0]?.textContent ?? "-"}</div>
-                        <div><strong>Battery:</strong> ${spec.getElementsByTagName("batteryType")[0]?.textContent ?? "-"}, ${spec.getElementsByTagName("batteryCharging")[0]?.textContent ?? "-"}</div>
-                    </div>
-                `;
-
-                const card = document.createElement("div");
-                card.className = "bg-white shadow rounded-lg p-4 hover:bg-indigo-50 cursor-pointer transition";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <div class="text-lg font-semibold">${brandValue} ${modelValue}</div>
-                        <div class="text-indigo-500 text-sm">Click for details</div>
-                    </div>
-                    ${detailsHtml}
-                `;
-
-                card.addEventListener("click", () => {
-                    const details = card.querySelector(".details");
-                    details.classList.toggle("hidden");
-                });
-
-                specList.appendChild(card);
-            });
-        }
-
-        fetchSpecifications();
-    </script>
+    <script src="../js/browse.js"></script>
 </body>
 
 </html>

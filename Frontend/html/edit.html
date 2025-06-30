@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Specification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <main class="flex-1 flex justify-center items-center p-8">
+        <div class="bg-white shadow rounded-xl p-8 w-full max-w-3xl overflow-y-auto max-h-[80vh]">
+            <form id="editForm" class="space-y-4">
+
+                <h2 class="text-xl font-bold text-indigo-600">Phone Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div><label class="block mb-1 font-semibold">Brand</label><input type="text" name="brandValue"
+                            class="w-full border rounded p-2" required></div>
+                    <div><label class="block mb-1 font-semibold">Model</label><input type="text" name="modelValue"
+                            class="w-full border rounded p-2" required></div>
+                    <div><label class="block mb-1 font-semibold">Year</label><input type="text" name="yearValue"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Launch Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block mb-1 font-semibold">Announced</label><input type="text"
+                            name="launchAnnounced" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Status</label><input type="text" name="launchStatus"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Body Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block mb-1 font-semibold">Dimensions</label><input type="text"
+                            name="bodyDimensions" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Weight</label><input type="text" name="bodyWeight"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">SIM</label><input type="text" name="bodySim"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Build</label><input type="text" name="bodyBuild"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other1</label><input type="text" name="bodyOther1"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other2</label><input type="text" name="bodyOther2"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other3</label><input type="text" name="bodyOther3"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Display Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block mb-1 font-semibold">Type</label><input type="text" name="displayType"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Size</label><input type="text" name="displaySize"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Resolution</label><input type="text"
+                            name="displayResolution" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Protection</label><input type="text"
+                            name="displayProtection" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other1</label><input type="text" name="displayOther1"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Memory Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div><label class="block mb-1 font-semibold">Card Slot</label><input type="text"
+                            name="memoryCardSlot" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Internal</label><input type="text"
+                            name="memoryInternal" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other1</label><input type="text" name="memoryOther1"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Sound Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block mb-1 font-semibold">3.5mm Jack</label><input type="text"
+                            name="sound35MmJack" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Loudspeaker</label><input type="text"
+                            name="soundLoudspeaker" class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other1</label><input type="text" name="soundOther1"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Other2</label><input type="text" name="soundOther2"
+                            class="w-full border rounded p-2"></div>
+                </div>
+
+                <h2 class="text-xl font-bold text-indigo-600 mt-6">Battery Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block mb-1 font-semibold">Type</label><input type="text" name="batteryType"
+                            class="w-full border rounded p-2"></div>
+                    <div><label class="block mb-1 font-semibold">Charging</label><input type="text"
+                            name="batteryCharging" class="w-full border rounded p-2"></div>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded mt-6">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 text-center p-4 text-gray-600">
+        &copy; <span id="year"></span> Phone Specifications App
+    </footer>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/edit.js"></script>
+</body>
+
+</html>

@@ -29,43 +29,55 @@
                 <button type="submit"
                     class="w-full bg-indigo-600 text-white rounded-lg py-2 hover:bg-indigo-700 transition">Login</button>
             </form>
+
+            <div id="errorMsg" class="mt-4"></div>
+
             <p class="text-center text-sm text-gray-600 mt-4">Don't have an account? <a href="register.html"
                     class="text-indigo-600 hover:underline">Register</a></p>
         </div>
     </div>
     <script src="../js/header.js"></script>
     <script>
+        const errorMsg = document.getElementById("errorMsg");
+
         document.getElementById("loginForm").addEventListener("submit", async function (e) {
             e.preventDefault();
+            errorMsg.innerHTML = ""; 
 
             const username = this.querySelector('input[type="text"]').value;
             const password = this.querySelector('input[type="password"]').value;
-            
+
             try {
                 const response = await fetch("http://localhost:5095/api/User/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, password })
+                    body: JSON.stringify({ username, password }),
+                    credentials: "include" 
                 });
 
                 if (!response.ok) {
-                    throw new Error("Invalid credentials");
+                    let message = "Invalid credentials.";
+                    try {
+                        const errorData = await response.json();
+                        message = errorData.message || message;
+                    } catch {
+                        message = await response.text() || message;
+                    }
+                    throw new Error(message);
                 }
 
                 const data = await response.json();
-                localStorage.setItem("accessToken", data.accessToken);
-                if (data.refreshToken) {
-                    localStorage.setItem("refreshToken", data.refreshToken);
+                if (data.accessToken) {
+                    localStorage.setItem("accessToken", data.accessToken);
                 }
 
                 window.location.href = "crudActions.html";
             } catch (err) {
-                alert("Login failed: " + err.message);
+                errorMsg.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    Invalid username or password
+                </div>`;
             }
         });
     </script>
-
-
 </body>
-
 </html>

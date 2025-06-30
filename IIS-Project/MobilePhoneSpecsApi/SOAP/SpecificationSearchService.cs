@@ -25,7 +25,12 @@ namespace MobilePhoneSpecsApi.SOAP
                 throw new XmlException("Invalid xml, errors: " + validationResult.ErrorMessages);
             }
 
-            string xpath = $"//specification[phoneDetails/modelValue[contains(., '{query}')]]";
+            string lowercaseQuery = query.ToLower();
+            string xpath = $"//specification[" +
+            $"contains(translate(phoneDetails/modelValue, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{lowercaseQuery}') or " +
+            $"contains(translate(phoneDetails/brandValue, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{lowercaseQuery}') or " +
+            $"contains(translate(phoneDetails/yearValue, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{lowercaseQuery}')]";
+
             var matchedNodes = xmlDoc.SelectNodes(xpath);
             var result = new List<SpecificationDto>();
 

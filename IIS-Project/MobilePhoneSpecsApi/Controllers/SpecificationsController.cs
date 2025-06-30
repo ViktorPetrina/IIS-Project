@@ -129,7 +129,7 @@ namespace MobilePhoneSpecsApi.Controllers
 
             var specificationDto = XmlUtils.DeserializeXml<SpecificationDto>(xmlData);
             var specification = _mapper.Map<Specification>(specificationDto);
-            await _repository.UpdateAsync(specification);
+            await _repository.UpdateAsync(id, specification);
 
             return Ok("Specification updated.");
         }

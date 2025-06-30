@@ -84,7 +84,14 @@ namespace MobilePhoneSpecsApi.Controllers
             });
             await _context.SaveChangesAsync();
 
-            return Ok(new { accessToken, refreshToken });
+            Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(7)
+            });
+
+            return Ok(new { accessToken });
         }
 
         [HttpPost("refresh")]
@@ -102,7 +109,14 @@ namespace MobilePhoneSpecsApi.Controllers
             storedToken.Expires = DateTime.UtcNow.AddDays(int.Parse(_config["Jwt:RefreshTokenDays"]!));
             await _context.SaveChangesAsync();
 
-            return Ok(new { accessToken, refreshToken = storedToken.Token });
+            Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(7)
+            });
+
+            return Ok(new { accessToken });
         }
 
         [HttpPost("logout")]

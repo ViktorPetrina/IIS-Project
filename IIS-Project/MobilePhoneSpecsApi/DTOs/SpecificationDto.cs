@@ -7,6 +7,7 @@ namespace MobilePhoneSpecsApi.DTOs
     [XmlRoot("specification")]
     public class SpecificationDto
     {
+        public long customId { get; set; }
         public PhoneDetailsDto phoneDetails { get; set; }
         public GsmLaunchDetailsDto gsmLaunchDetails { get; set; }
         public GsmBodyDetailsDto gsmBodyDetails { get; set; }

@@ -41,7 +41,6 @@
               <xs:element name="displayResolution" type="xs:string" />
               <xs:element name="displayProtection" type="xs:string" />
               <xs:element name="displayOther1" type="xs:string" />
-              <xs:element name="displayOther2" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -68,8 +67,6 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="batteryCharging" type="xs:string" />
-              <xs:element name="batteryMusicPlay" type="xs:string" />
-              <xs:element name="batteryTalkTime" type="xs:string" />
               <xs:element name="batteryType" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
